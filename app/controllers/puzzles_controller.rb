@@ -5,7 +5,7 @@ require 'digest'
 # when appended to the puzzle input, generates an MD5 hash starting with five zeroes.
 class PuzzlesController < ApplicationController
   def index
-    @puzzle = Puzzle.find(1).input
+    @puzzles = Puzzle.all
     # Rails.logger.debug @puzzle.inspect
   end
 

@@ -1,3 +1,11 @@
 <h1>Puzzles#index</h1>
 <p>Find me in app/views/puzzles/index.html.erb</p> 
-<%= @puzzle %>
+<ul>
+  <% @puzzles.each do |puzzle| %>
+    <li>
+      <a href="<%= puzzle_path(puzzle) %>">
+        <%= puzzle.year %>/<%= puzzle.day %>-<%= puzzle.part %>
+      </a>
+    </li>
+  <% end %>
+</ul>
