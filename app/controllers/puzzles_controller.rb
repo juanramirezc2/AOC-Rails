@@ -9,21 +9,45 @@ class PuzzlesController < ApplicationController
     # Rails.logger.debug @puzzle.inspect
   end
 
-  def show
-    @puzzle = Puzzle.find(params[:id])
-    @number, @md5_hash = find_number_and_hash(@puzzle.input)
+  def new
+    @puzzle = Puzzle.new
   end
 
-  private
+  def show
+    @puzzle = Puzzle.find(params[:id])
+    if @puzzle.day == '4'
+      @result = solve_day_4(@puzzle.input)
+    elsif @puzzle.day == '5'
+      @result = solve_day_5(@puzzle.input)
+    end
+  end
 
-  def find_number_and_hash(input)
-    counter = 0
+  def create
+    @puzzle = Puzzle.new(puzzle_params)
+
+    if @puzzle.save
+      redirect_to @puzzle
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def solve_day_4(input)
+    result = 0
 
     loop do
-      hash = Digest::MD5.hexdigest(input + counter.to_s)
-      return counter, hash if hash.start_with?('000000')
+      hash = Digest::MD5.hexdigest(input + result.to_s)
+      return result if hash.start_with?('000000')
 
-      counter += 1
+      result += 1
     end
+  end
+
+  def solve_day_5(input)
+    ## place your code here
+  end
+
+  def puzzle_params
+    params.require(:puzzle).permit(:year, :day, :part, :input)
   end
 end
