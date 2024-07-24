@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   root 'puzzles#index'
-  get '/puzzles/:id', to: 'puzzles#show'
+  get '/puzzle/:id', to: 'puzzles#show'
 
   # resources :puzzles
 end
