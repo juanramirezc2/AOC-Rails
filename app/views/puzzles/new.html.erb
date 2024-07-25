@@ -28,7 +28,7 @@
 
   <div>
     <%= form.label :input %><br>
-    <%= form.text_area :input %>
+    <%= form.text_area :input, rows: 10, cols: 50 %>
     <% @puzzle.errors.full_messages_for(:input).each do |message| %>
       <div><%= message %></div>
     <% end %>
