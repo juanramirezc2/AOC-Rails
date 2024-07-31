@@ -16,9 +16,9 @@ class PuzzlesController < ApplicationController
   def show
     @puzzle = Puzzle.find(params[:id])
     if @puzzle.day == '4'
-      @result = solve_day_4(@puzzle.input)
+      @result = solve_day_four(@puzzle.input)
     elsif @puzzle.day == '5'
-      @result = solve_day_5(@puzzle.input)
+      @result = solve_day_five(@puzzle.input)
     end
   end
 
@@ -32,7 +32,7 @@ class PuzzlesController < ApplicationController
     end
   end
 
-  def solve_day_4(input)
+  def solve_day_four(input)
     result = 0
 
     loop do
@@ -43,8 +43,21 @@ class PuzzlesController < ApplicationController
     end
   end
 
-  def solve_day_5(input)
-    ## place your code here
+  def solve_day_five(input)
+    input_array = input.split("\n")
+    nice_words = 0
+    input_array.each do |line|
+      # check if line includes at least 3 vovels
+      next unless line.scan(/[aeiou]/).count >= 3
+      # check if line includes at least one letter that appears twice in a row
+      next unless line.match(/(.)\1/)
+      # check if line does not include any of the following strings: ab, cd, pq, or xy
+      next if line.match(/ab|cd|pq|xy/)
+
+      nice_words += 1
+    end
+
+    nice_words
   end
 
   def puzzle_params

@@ -1,6 +1,5 @@
 <h1>Puzzles#show</h1>
-<h2> puzzle input</h2>
-<%= @puzzle.input %>
-<p>Find me in app/views/puzzles/show.html.erb</p> 
 <p> Result </p>
-<%= @result %>
+<h2><%= defined?(@result) ? @result : "Not solved yet" %></h2>
+<p> puzzle input</p>
+<%= @puzzle.input %>
